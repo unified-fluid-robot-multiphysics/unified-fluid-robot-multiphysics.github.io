@@ -8,7 +8,7 @@
 <!-- Open Graph / social -->
 <meta property="og:title" content="Realizing Robotic Swimming with Unified Fluid Robot Multiphysics" />
 <meta property="og:description" content="A differentiable framework that derives strongly coupled fluid-robot dynamics from a single Lagrangian, enabling sim-to-real transfer of undulatory swimming and a C-start escape on a bioinspired eel robot." />
-<meta property="og:image" content="static/images/rsswebfig1.jpg" />
+<meta property="og:image" content="static/images/figure1_eel_c_start_optimal_timepoints.png" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -67,7 +67,7 @@ body {
 a { color: var(--accent-2); text-decoration: none; transition: color .15s ease; }
 a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
-img, video { max-width: 100%; height: auto; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 
 .wrap       { max-width: var(--max);      margin: 0 auto; padding: 0 24px; }
 .wrap-wide  { max-width: var(--max-wide); margin: 0 auto; padding: 0 24px; }
@@ -197,7 +197,7 @@ p.lead { color: var(--ink-2); font-size: 1.04rem; }
   overflow: hidden;
   box-shadow: var(--shadow-md);
 }
-.teaser video, .teaser img { width: 100%; display: block; }
+.teaser img { width: 100%; display: block; }
 figcaption {
   margin-top: 14px;
   font-family: "Newsreader", Georgia, serif;
@@ -218,20 +218,6 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
 
 /* Abstract -- drop cap REMOVED per request */
 .abstract p { font-size: 1.05rem; color: var(--ink); }
-
-/* Video Overview */
-#video { padding: 48px 0 52px; }
-#video .section-title { margin-bottom: 22px; }
-.video-overview { margin: 0; }
-.video-overview .frame {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-.video-overview video { width: 100%; display: block; }
-.video-overview figcaption { margin-top: 16px; max-width: 720px; }
 
 /* Method */
 .method-figure { margin: 12px 0 28px; }
@@ -574,9 +560,8 @@ footer a { color: var(--ink-2); }
   <p class="equal-note reveal"><sup>&dagger;</sup> Equal contribution</p>
 
   <div class="buttons reveal">
-    <a class="btn" href="#"><span class="arxiv-mark">arXiv</span></a>
-    <a class="btn" href="#"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.5-2.5-.3-5.2-1.3-5.2-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.4.1-3 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.7.1 3 .8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.2 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
-    <a class="btn" href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Video</a>
+    <a class="btn" href="https://arxiv.org/abs/2506.05012" target="_blank" rel="noopener noreferrer"><span class="arxiv-mark">arXiv</span></a>
+    <a class="btn" href="https://github.com/RoboticExplorationLab/Aquarium.jl" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.5-2.5-.3-5.2-1.3-5.2-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.4.1-3 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.7.1 3 .8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.2 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
     <a class="btn ghost" href="#bibtex"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 0 1 2-2h12v14H6a2 2 0 0 0-2 2z"/><path d="M8 7h8M8 11h6"/></svg>BibTeX</a>
   </div>
 </header>
@@ -585,13 +570,13 @@ footer a { color: var(--ink-2); }
 <section class="teaser wrap">
   <figure class="reveal">
     <div class="frame">
-      <img src="static/images/rsswebfig1.jpg" alt="Time-lapse comparison of a multi-link eel robot across t = 0 to 3 seconds. Top row: hardware. Middle row: our unified multiphysics simulator. Bottom row: particle-based simulator." />
+      <img src="static/images/figure1_eel_c_start_optimal_timepoints.png" alt="Time-lapse of an optimized C-start escape maneuver from t = 0 to 3 seconds. Top row: hardware. Middle row: unified multiphysics. Bottom row: particle-based simulator." />
     </div>
     <figcaption>
-      Time-lapse on a multi-link eel robot across <em>t = 0&ndash;3&nbsp;s</em>.
+      Optimized C-start escape maneuver on a multi-link eel robot across <em>t = 0&ndash;3&nbsp;s</em>.
       <span class="tag-hardware">Hardware</span> (top) is closely tracked by our
-      <span class="tag-ours">unified multiphysics</span> simulator (middle), while a
-      <span class="tag-baseline">particle-based simulator</span> (bottom) fails to capture the coupled fluid-robot dynamics &mdash; rolling out the same control trajectory drifts off the hardware path.
+      <span class="tag-ours">unified multiphysics</span> simulator (middle), while the
+      <span class="tag-baseline">particle-based simulator</span> (bottom) fails to complete the intended 90&deg; turn.
     </figcaption>
   </figure>
 </section>
@@ -610,22 +595,6 @@ footer a { color: var(--ink-2); }
   </p>
 </section>
 
-<!-- ============================================================ VIDEO ============================================================ -->
-<section class="wrap" id="video">
-  <h2 class="section-title reveal">Video Overview</h2>
-  <figure class="video-overview reveal">
-    <div class="frame">
-      <video controls preload="metadata" playsinline>
-        <source src="static/videos/supplemental_video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <figcaption>
-      Full supplemental video &mdash; an end-to-end walkthrough of the unified Lagrangian formulation, the discrete variational integrator, simulation results, and hardware experiments on the eel robot.
-    </figcaption>
-  </figure>
-</section>
-
 <!-- ============================================================ METHOD ============================================================ -->
 <section class="wrap" id="method">
   <h2 class="section-title reveal">Method</h2>
@@ -636,7 +605,7 @@ footer a { color: var(--ink-2); }
 
   <figure class="method-figure reveal">
     <div class="frame">
-      <img src="static/images/rssfig3.png" alt="Unified least-action formulation: a single constrained optimization yields the incompressible Navier-Stokes and manipulator equations, coupled through Lagrange multipliers." />
+      <img src="static/images/figure3_physics_comparison.png" alt="Unified least-action formulation: a single constrained optimization yields the incompressible Navier-Stokes and manipulator equations, coupled through Lagrange multipliers." />
     </div>
     <figcaption>
       The unified Lagrangian governing the coupled fluid&ndash;robot dynamics. Variational calculus on the combined action recovers the incompressible Navier&ndash;Stokes and manipulator equations; the multiphysics coupling stems from a single constraint enforcing no-slip at the fluid&ndash;robot interface.
@@ -882,7 +851,7 @@ footer a { color: var(--ink-2); }
 
   <figure class="results-figure reveal">
     <div class="frame">
-      <img src="static/images/rsswebundula.png" alt="Time-lapse comparison: Hardware, Unified Multiphysics, and Particle-based Simulator at t = 0, 1, 2, 3, 4 seconds." />
+      <img src="static/images/figure9_eel_forward_swimming_timepoints.png" alt="Time-lapse comparison: Hardware, Unified Multiphysics, and Particle-based Simulator at t = 0, 1, 2, 3, 4 seconds." />
     </div>
     <figcaption>
       Time-lapse of forward swimming at 40&deg; amplitude across <em>t = 0&ndash;4&nbsp;s</em>.
@@ -894,7 +863,7 @@ footer a { color: var(--ink-2); }
 
   <figure class="results-figure reveal">
     <div class="frame">
-      <img src="static/images/rsswebfigbarrmse.png" alt="Bar charts of head-link RMSE for x1, y1, and theta1 versus undulation amplitude (10, 20, 30, 40 degrees), comparing Unified Multiphysics against the particle-based baseline." />
+      <img src="static/images/figure8_rmse_comparison.png" alt="Bar charts of head-link RMSE for x1, y1, and theta1 versus undulation amplitude (10, 20, 30, 40 degrees), comparing Unified Multiphysics against the particle-based baseline." />
     </div>
     <figcaption>
       Mean trajectory RMSE of the head-link configuration ($x_1$, $y_1$, $\theta_1$) versus undulation amplitude.
@@ -955,17 +924,6 @@ footer a { color: var(--ink-2); }
     </figure>
   </div>
 
-  <figure class="results-figure reveal">
-    <div class="frame">
-      <img src="static/images/rsswebtraj.png" alt="Head-link XY trajectories during the C-start: dotted lines for the initial guess and solid lines for the gradient-optimized parameters, plotted for Hardware, Unified Multiphysics, and the particle-based baseline." />
-    </div>
-    <figcaption>
-      Head-link XY trajectories during the C-start. <em>Dotted</em>: initial guess; <em>solid</em>: after gradient-based optimization.
-      Our <span class="tag-ours">unified multiphysics</span> simulator (cyan) closely follows the
-      <span class="tag-hardware">hardware</span> (red) post-optimization, executing the 90&deg; turn from rest, while the
-      <span class="tag-baseline">particle-based baseline</span> (orange) stalls near the start point in both regimes.
-    </figcaption>
-  </figure>
 </section>
 
 <!-- ============================================================ HARDWARE ============================================================ -->
@@ -976,7 +934,7 @@ footer a { color: var(--ink-2); }
   </p>
   <figure class="results-figure reveal">
     <div class="frame">
-      <img src="static/images/figure7_hardware_setup.png" alt="Hardware setup: a 122 x 122 cm pool with an overhead camera, and an inset showing the eel robot with annotated motors, body shells, fins, and microcontroller." />
+      <img src="static/images/figure7_hardware_setup_v2.png" alt="Hardware setup: a 122 x 122 cm pool with an overhead camera, and an inset showing the eel robot with annotated motors, body shells, fins, and microcontroller." />
     </div>
     <figcaption>
       Sim-to-real validation setup. An overhead camera tracks AprilTags on the head link inside a 122&nbsp;&times;&nbsp;122&nbsp;cm pool that recreates the simulated walled cavity. <em>Inset:</em> the bioinspired eel robot, with buoyant 3D-printed body shells housing the Dynamixel <span class="tag-ours">motors</span> and head-link <span class="tag-hardware">microcontroller</span>; thin rigid <span class="tag-coupling">fins</span> underneath maintain a thin-plate hydrodynamic profile.
@@ -1010,7 +968,7 @@ footer a { color: var(--ink-2); }
   <p class="reveal" style="font-size:0.9rem; color:var(--ink-3);">
     This page borrows its structure from the
     <a href="https://nerfies.github.io/">Nerfies project page</a>; source available on
-    <a href="#">GitHub</a>.
+    <a href="https://github.com/RoboticExplorationLab/Aquarium.jl" target="_blank" rel="noopener noreferrer">GitHub</a>.
   </p>
 </section>
 
