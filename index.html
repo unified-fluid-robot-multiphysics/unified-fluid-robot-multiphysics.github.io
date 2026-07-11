@@ -385,6 +385,39 @@ details.deriv .body { padding: 4px 22px 18px; border-top: 1px solid var(--rule);
 }
 .contributions li b { color: var(--accent); font-family: "Newsreader", serif; font-weight: 600; }
 
+.summary-grid,
+.cost-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin: 24px 0 30px;
+}
+.summary-card,
+.cost-card {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+.summary-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.12rem;
+  color: var(--accent);
+}
+.summary-card p { margin: 0; color: var(--ink-2); font-size: 0.95rem; line-height: 1.55; }
+.cost-card .value {
+  display: block;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.9rem;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.cost-card .label { color: var(--ink-2); font-size: 0.9rem; line-height: 1.45; }
+.cost-card.ours { border-top: 3px solid var(--green-ours); }
+.cost-card.baseline { border-top: 3px solid var(--orange-bl); }
+
 /* Results */
 .video-grid {
   display: grid;
@@ -597,6 +630,38 @@ footer a { color: var(--ink-2); }
   <p class="reveal">
     Using this simulator and its gradients, we realize undulating swimming gaits and optimize a highly dynamic C-start escape maneuver for a bioinspired eel robot. We validate both gaits on physical hardware, demonstrating successful sim-to-real transfer.
   </p>
+</section>
+
+<!-- ============================================================ OVERVIEW ============================================================ -->
+<section class="wrap" id="overview">
+  <h2 class="section-title reveal">Why unified multiphysics?</h2>
+  <p class="lead reveal">
+    Robotic swimming is a genuinely <b>strongly coupled</b> problem: the robot reshapes the surrounding flow, and the resulting pressure and viscous forces immediately change the robot's motion. Treating those two systems as separate simulators connected by an external force can miss the vortex interactions that make fish-like locomotion efficient and agile.
+  </p>
+
+  <figure class="method-figure reveal">
+    <div class="frame">
+      <img src="static/images/figure2_problem_setup_dark.png" alt="A controlled articulated robot swimming through an incompressible Newtonian fluid domain, with the fluid and robot boundaries labeled." />
+    </div>
+    <figcaption>
+      Problem setting. A controlled articulated robot with geometry $Gamma$ moves through an incompressible Newtonian fluid occupying $Omega$. The no-slip condition on the shared interface must transmit motion and force consistently in both directions.
+    </figcaption>
+  </figure>
+
+  <div class="summary-grid reveal">
+    <article class="summary-card">
+      <h3>One physical model</h3>
+      <p>Fluid and robot equations are derived from one constrained action, so coupling is part of the dynamics rather than a post-processing force.</p>
+    </article>
+    <article class="summary-card">
+      <h3>Multibody-ready coupling</h3>
+      <p>An integral-form immersed boundary constraint remains well-conditioned around adjacent links and overlapping boundary nodes.</p>
+    </article>
+    <article class="summary-card">
+      <h3>End-to-end gradients</h3>
+      <p>Implicit differentiation captures how design or gait parameters alter both robot motion and the surrounding fluid state.</p>
+    </article>
+  </div>
 </section>
 
 <!-- ============================================================ METHOD ============================================================ -->
@@ -834,8 +899,33 @@ footer a { color: var(--ink-2); }
     Unlike the pointwise form, $\bar E$ stays well-conditioned when boundary nodes overlap, and the constraint is satisfied <em>between</em> nodes rather than only at them. Differentiating through&nbsp;(15) inside&nbsp;(12)&ndash;(13) gives the multibody-friendly coupling we use throughout the paper.
   </p>
 
+  <!-- §5 -->
+  <h3 class="reveal"><span class="num">5.</span>Optimizing through fluid&ndash;robot gradients</h3>
+  <p class="reveal">
+    Differentiability turns the simulator into an optimization tool rather than only a rollout engine. Let $x_k=[q^r,\bar v^r,\bar v^f]_k$ collect the full robot and fluid state, let $\beta$ denote gait or design parameters, and let $f(x_{k+1},x_k;\beta)=0$ denote the implicit coupled update. We solve
+  </p>
+
+  <div class="eq-feature reveal">
+    <span class="eq-tag">Gradient-based optimization</span>
+    <div class="eq-body">
+      $$\begin{aligned}
+        \min_{\beta}\quad & J(x_{1:N}) \\
+        \text{s.t.}\quad & f(x_{k+1},x_k;\beta)=0.
+      \end{aligned}$$
+    </div>
+  </div>
+
+  <p class="reveal">
+    Applying the implicit function theorem to the <em>entire</em> nonlinear multiphysics solve gives $\partial x_{k+1}/\partial x_k$ and $\partial x_k/\partial\beta$. Backpropagating those sensitivities through time yields $\nabla_\beta J$, including how every parameter changes both the articulated body and the surrounding flow. We use these gradients with box-constrained L-BFGS to optimize the C-start maneuver below.
+  </p>
+
+  <div class="callout reveal">
+    <span class="label">Why the unified gradient matters</span>
+    <p>A robot-only derivative would ignore how a parameter changes vortex formation and hydrodynamic loading. Here the sensitivity passes through the same strongly coupled equations used for simulation.</p>
+  </div>
+
   <!-- Contributions -->
-  <h3 class="reveal"><span class="num">5.</span>Contributions</h3>
+  <h3 class="reveal"><span class="num">6.</span>Contributions</h3>
   <ul class="contributions reveal">
     <li>A <b>unified derivation</b> of strongly coupled fluid-robot multiphysics via the principle of least action.</li>
     <li>A <b>new weak formulation</b> of the no-slip boundary constraint at the fluid-robot interface.</li>
@@ -847,6 +937,20 @@ footer a { color: var(--ink-2); }
 <!-- ============================================================ RESULTS ============================================================ -->
 <section class="wrap" id="results">
   <h2 class="section-title reveal">Results</h2>
+
+  <h3 class="reveal">Experimental setup</h3>
+  <p class="reveal">
+    We evaluate the simulator in a 122&nbsp;&times;&nbsp;122&nbsp;cm cavity of initially still water with walled boundary conditions. The eel is represented in maximal coordinates by six 9.8&nbsp;cm rigid links connected by five revolute joints. Our finite-volume fluid uses 1&nbsp;cm cells; the Genesis SPH baseline uses equivalently sized particles so both methods are compared at consistent spatial fidelity.
+  </p>
+
+  <figure class="results-figure reveal">
+    <div class="frame">
+      <img src="static/images/figure6_environment_setup_dark.png" alt="A six-link eel robot inside a 122 by 122 centimeter walled fluid cavity, with maximal-coordinate link poses and joint angles labeled." />
+    </div>
+    <figcaption>
+      Matched simulation environment. Each link configuration is parameterized by $(x_i,y_i,\theta_i)$ and adjacent links are connected by the commanded joint angles $\bar\theta_i$.
+    </figcaption>
+  </figure>
 
   <h3 class="reveal">Steady undulatory swimming</h3>
   <p class="reveal">
@@ -893,8 +997,25 @@ footer a { color: var(--ink-2); }
 
   <h3 class="reveal" style="margin-top:48px;">Optimizing a highly dynamic C-start</h3>
   <p class="reveal">
-    We use the simulator's gradients to optimize a fish-inspired C-start escape maneuver. The maneuver consists of a <em>bend phase</em> (0&ndash;1 s) where the robot curls into a C-shape, followed by a <em>propulsion phase</em> (1&ndash;3 s) where it transitions into undulation. The optimization variables are the per-joint bend angles $\bar\theta_{1:5}$, the head joint phase $\phi_1$, and body wavelength $\lambda$; the undulation amplitude is fixed at 25&deg; to avoid hitting the wall. With L-BFGS, starting from $\bar\theta_{1:5}=[36^\circ\!,\,36^\circ\!,\,36^\circ\!,\,36^\circ\!,\,36^\circ]$, $\phi_1=-\pi/4$, $\lambda=0.7L_B$, we maximize center-of-mass velocity in the target direction and converge to $\bar\theta_{1:5}\!\approx\![17.2^\circ\!,\,17.8^\circ\!,\,19.4^\circ\!,\,23.1^\circ\!,\,36^\circ]$, $\phi_1\!\approx\!-1.16$, $\lambda\!\approx\!0.57L_B$ &mdash; achieving a <b>90&deg; turn from rest</b> that transfers open-loop to hardware. The SPH baseline fails to realize either the turn or the propulsion.
+    We use the simulator's gradients to optimize a fish-inspired C-start escape maneuver. The robot first curls into a C-shape during a <em>bending phase</em> (0&ndash;1&nbsp;s), then rapidly straightens and launches a traveling wave during the <em>propulsion phase</em> (1&ndash;3&nbsp;s). The terminal objective penalizes error between the final center-of-mass configuration $q_N^{\mathrm{com}}$ and a goal configuration $q_{\mathrm{goal}}$ representing a 90&deg; turn:
   </p>
+
+  <div class="eq coupling reveal">
+    $$J(x_N)=\tfrac{1}{2}(q_N^{\mathrm{com}}-q_{\mathrm{goal}})^\top Q(q_N^{\mathrm{com}}-q_{\mathrm{goal}}).$$
+  </div>
+
+  <p class="reveal">
+    We optimize the five bend angles $\bar\theta_{1:5}$, traveling-wave phase $\phi$, and wavelength $\lambda$, while fixing joint amplitude to 25&deg; to avoid the pool wall. Box-constrained L-BFGS uses $10^\circ\!\leq\!\bar\theta_{1:5}\!\leq\!36^\circ$, $-\pi/2\!\leq\!\phi\!\leq\!0$, and $0.5L_B\!\leq\!\lambda\!\leq\!L_B$. Starting from $\bar\theta_{1:5}^{\mathrm{ig}}=10^\circ$, $\phi^{\mathrm{ig}}=-\pi/3$, and $\lambda^{\mathrm{ig}}=0.6L_B$, optimization converges to $[17^\circ,18^\circ,20^\circ,24^\circ,36^\circ]$, $\phi^*=-1.16$, and $\lambda^*=0.57L_B$. The optimized gait executes the desired turn open-loop on hardware; the SPH baseline realizes neither the turn nor the propulsion.
+  </p>
+
+  <figure class="results-figure reveal">
+    <div class="frame">
+      <img src="static/images/figure10_c_start_setup_dark.png" alt="C-start gait parameterization showing a bending phase from zero to one second and a propulsion phase from one to three seconds, with bend angles, phase, and wavelength labeled." />
+    </div>
+    <figcaption>
+      C-start parameterization. Bend angles define the initial curl; phase and wavelength define the traveling wave that generates reorientation and propulsion.
+    </figcaption>
+  </figure>
 
   <p class="subhead reveal"><span class="num">a.</span>Initial guess (before optimization)</p>
   <div class="video-grid reveal">
@@ -928,6 +1049,26 @@ footer a { color: var(--ink-2); }
     </figure>
   </div>
 
+  <h3 class="reveal" style="margin-top:48px;">Computational cost</h3>
+  <p class="reveal">
+    A 3-second C-start rollout contains 300 steps at 100&nbsp;Hz. On an M3 Ultra Mac Studio CPU, our implicit unified solve completes the rollout in approximately 261&nbsp;s. The matched Genesis SPH rollout takes 2727&nbsp;s on the same CPU and 300&nbsp;s on an NVIDIA RTX&nbsp;3070&nbsp;Ti GPU.
+  </p>
+
+  <div class="cost-grid reveal">
+    <article class="cost-card ours">
+      <span class="value">261 s</span>
+      <span class="label">Unified multiphysics<br>28-core M3 Ultra CPU<br>0.87 s per step</span>
+    </article>
+    <article class="cost-card baseline">
+      <span class="value">2727 s</span>
+      <span class="label">Genesis SPH<br>28-core M3 Ultra CPU<br>9.09 s per step</span>
+    </article>
+    <article class="cost-card baseline">
+      <span class="value">300 s</span>
+      <span class="label">Genesis SPH<br>NVIDIA RTX 3070 Ti GPU<br>1.00 s per step</span>
+    </article>
+  </div>
+
 </section>
 
 <!-- ============================================================ HARDWARE ============================================================ -->
@@ -944,6 +1085,34 @@ footer a { color: var(--ink-2); }
       Sim-to-real validation setup. An overhead camera tracks AprilTags on the head link inside a 122&nbsp;&times;&nbsp;122&nbsp;cm pool that recreates the simulated walled cavity. <em>Inset:</em> the bioinspired eel robot, with buoyant 3D-printed body shells housing the Dynamixel <span class="tag-ours">motors</span> and head-link <span class="tag-hardware">microcontroller</span>; thin rigid <span class="tag-coupling">fins</span> underneath maintain a thin-plate hydrodynamic profile.
     </figcaption>
   </figure>
+</section>
+
+<!-- ============================================================ LIMITATIONS ============================================================ -->
+<section class="wrap" id="outlook">
+  <h2 class="section-title reveal">Limitations and outlook</h2>
+  <p class="reveal">
+    The experiments demonstrate substantially better sim-to-real fidelity than the particle-based baseline, but the model is not yet a complete description of the physical platform. The optimized C-start consistently undershoots the hardware travel distance, likely because the current model omits free-surface dynamics, servo compliance, detailed fin geometry, and uncertainty in mass properties and viscosity.
+  </p>
+
+  <div class="summary-grid reveal">
+    <article class="summary-card">
+      <h3>Computational scaling</h3>
+      <p>Implicit integration is expensive, particularly in 3D. Future solvers must exploit sparsity and structure to scale to larger domains and longer-horizon optimization.</p>
+    </article>
+    <article class="summary-card">
+      <h3>Representation tradeoff</h3>
+      <p>The Eulerian grid is well suited to dynamic swimming and physical constraints, but is less convenient for visual rendering than particle-based fluid representations.</p>
+    </article>
+    <article class="summary-card">
+      <h3>Beyond swimming</h3>
+      <p>Promising extensions include implicit large-eddy simulation, design optimization, and other strongly coupled systems such as rigid-soft robots with contact.</p>
+    </article>
+  </div>
+
+  <div class="callout reveal">
+    <span class="label">Takeaway</span>
+    <p>Representation and coupling matter: deriving, integrating, and differentiating the fluid and robot as one constrained system produces swimming behavior that aligns far more closely with hardware and enables gradient-based optimization of dynamic maneuvers.</p>
+  </div>
 </section>
 
 <!-- ============================================================ BIBTEX ============================================================ -->

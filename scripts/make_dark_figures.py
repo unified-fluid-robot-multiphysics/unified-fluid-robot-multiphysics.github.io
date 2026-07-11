@@ -38,9 +38,12 @@ PROTECTED = {
 
 TARGETS = [
     "figure1_eel_c_start_optimal_timepoints.png",
+    "figure2_problem_setup.png",
     "figure3_physics_comparison.png",
+    "figure6_environment_setup.png",
     "figure8_rmse_comparison.png",
     "figure9_eel_forward_swimming_timepoints.png",
+    "figure10_c_start_setup.png",
 ]
 
 
