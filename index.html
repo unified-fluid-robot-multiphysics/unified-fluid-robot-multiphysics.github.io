@@ -68,6 +68,7 @@ a { color: var(--accent-2); text-decoration: none; transition: color .15s ease; 
 a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
 img { max-width: 100%; height: auto; display: block; }
+figure { margin: 0; }
 
 .wrap       { max-width: var(--max);      margin: 0 auto; padding: 0 24px; }
 .wrap-wide  { max-width: var(--max-wide); margin: 0 auto; padding: 0 24px; }
@@ -189,7 +190,7 @@ p.lead { color: var(--ink-2); font-size: 1.04rem; }
 .btn:hover .arxiv-mark { color: #ff7c7c; }
 
 /* Teaser */
-.teaser { padding: 24px 0 8px; }
+.teaser { padding: 24px 24px 8px; }
 .teaser .frame {
   background: var(--surface);
   border: 1px solid var(--rule);
@@ -199,7 +200,8 @@ p.lead { color: var(--ink-2); font-size: 1.04rem; }
 }
 .teaser img { width: 100%; display: block; }
 figcaption {
-  margin-top: 14px;
+  max-width: 88ch;
+  margin: 15px auto 0;
   font-family: "Newsreader", Georgia, serif;
   font-style: italic;
   font-size: 0.95rem;
@@ -219,15 +221,36 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
 /* Abstract -- drop cap REMOVED per request */
 .abstract p { font-size: 1.05rem; color: var(--ink); }
 
-/* Method */
-.method-figure { margin: 12px 0 28px; }
-.method-figure .frame {
+/* Scientific figures */
+.method-figure,
+.results-figure {
+  width: 100%;
+  margin: 28px auto 38px;
+}
+.figure-standard { max-width: 780px; }
+.figure-compact  { max-width: 720px; }
+
+.method-figure .frame,
+.results-figure .frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  padding: 18px;
+  border-radius: 12px;
+  padding: clamp(12px, 1.8vw, 18px);
+  overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
+.method-figure img,
+.results-figure img {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.figure-standard figcaption,
+.figure-compact figcaption { max-width: none; }
+.figure-compact img { max-width: 716px; }
 
 /* Equation block — standard, with right-aligned number */
 .eq {
@@ -421,14 +444,16 @@ details.deriv .body { padding: 4px 22px 18px; border-top: 1px solid var(--rule);
 /* Results */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  margin: 18px 0 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  max-width: 920px;
+  margin: 22px auto 18px;
 }
 .video-card {
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-radius: var(--radius);
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
 }
@@ -508,15 +533,6 @@ details.deriv .body { padding: 4px 22px 18px; border-top: 1px solid var(--rule);
 }
 .timeline-strip .header span:first-child { visibility: hidden; }
 
-.results-figure { margin: 12px 0 20px; }
-.results-figure .frame {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  padding: 22px;
-  box-shadow: var(--shadow-sm);
-}
-
 .bibtex-block {
   position: relative;
   background: var(--bg-soft);
@@ -559,6 +575,13 @@ footer a { color: var(--ink-2); }
 @media (max-width: 640px) {
   section { padding: 44px 0; }
   .hero { padding: 56px 0 24px; }
+  .teaser { padding: 20px 16px 6px; }
+  .method-figure,
+  .results-figure { margin: 22px auto 30px; }
+  .method-figure .frame,
+  .results-figure .frame { padding: 8px; border-radius: 9px; }
+  figcaption { margin-top: 11px; font-size: 0.9rem; line-height: 1.5; }
+  .video-grid { grid-template-columns: 1fr; max-width: 390px; gap: 16px; }
   .timeline-strip .row, .timeline-strip .header { grid-template-columns: 60px repeat(7, 1fr); }
   .timeline-strip .row-label { font-size: 0.72rem; }
   .eq { font-size: 0.94rem; padding-right: 50px; }
@@ -639,7 +662,7 @@ footer a { color: var(--ink-2); }
     Robotic swimming is a genuinely <b>strongly coupled</b> problem: the robot reshapes the surrounding flow, and the resulting pressure and viscous forces immediately change the robot's motion. Treating those two systems as separate simulators connected by an external force can miss the vortex interactions that make fish-like locomotion efficient and agile.
   </p>
 
-  <figure class="method-figure reveal">
+  <figure class="method-figure figure-wide reveal">
     <div class="frame">
       <img src="static/images/figure2_problem_setup_final.png" alt="Unified least-action overview showing an articulated robot moving through the surrounding fluid velocity field." />
     </div>
@@ -672,7 +695,7 @@ footer a { color: var(--ink-2); }
     Existing multiphysics simulators time-integrate the fluid and robot equations <em>separately</em>, then couple them through an explicit force term. We instead pose the entire problem as a <b>single least-action optimization</b>: the unified Lagrangian is discretized directly, and the coupling forces emerge as Lagrange multipliers of a no-slip constraint.
   </p>
 
-  <figure class="method-figure reveal">
+  <figure class="method-figure figure-wide reveal">
     <div class="frame">
       <img src="static/images/figure3_physics_comparison_final.png" alt="Unified least-action formulation: a single constrained optimization yields the incompressible Navier-Stokes and manipulator equations, coupled through constraint forces." />
     </div>
@@ -805,7 +828,7 @@ footer a { color: var(--ink-2); }
     in which the velocity $\bv_k$ lives <em>between</em> the configurations $q_k$ and $q_{k+1}$. For pure rigid-body simulation this half-step delay is harmless. For our problem it is not: the fluid is represented as a velocity field $\bv^f$ while the robot pose lives in $q^r$, and the no-slip constraint must couple them at a consistent time.
   </p>
 
-  <figure class="method-figure reveal">
+  <figure class="method-figure figure-standard reveal">
     <div class="frame">
       <img src="static/images/figure4_variational_integrator_dark.png" alt="Midpoint variational integrator showing robot configurations at integer time steps and fluid velocity fields at half time steps, creating a temporal mismatch." />
     </div>
@@ -885,7 +908,7 @@ footer a { color: var(--ink-2); }
     discretized as $\;E v^f - {}^bv^r = 0,\;$ with a convolution matrix $E$ built from a smoothed delta. This satisfies no-slip only at a finite set of boundary nodes &mdash; allowing fluid penetration when nodes are sparse, and producing redundant, ill-conditioned constraints when nodes from neighboring bodies overlap. Both pathologies are common in articulated robots.
   </p>
 
-  <figure class="method-figure reveal">
+  <figure class="method-figure figure-standard reveal">
     <div class="frame">
       <img src="static/images/figure5_integral_immersed_boundary_dark.png" alt="Immersed-boundary coupling between an articulated robot and a fluid grid, comparing the original pointwise no-slip constraint with the proposed integral-form constraint along each body segment." />
     </div>
@@ -961,7 +984,7 @@ footer a { color: var(--ink-2); }
     We evaluate the simulator in a 122&nbsp;&times;&nbsp;122&nbsp;cm cavity of initially still water with walled boundary conditions. The eel is represented in maximal coordinates by six 9.8&nbsp;cm rigid links connected by five revolute joints. Our finite-volume fluid uses 1&nbsp;cm cells; the Genesis SPH baseline uses equivalently sized particles so both methods are compared at consistent spatial fidelity.
   </p>
 
-  <figure class="results-figure reveal">
+  <figure class="results-figure figure-standard reveal">
     <div class="frame">
       <img src="static/images/figure6_environment_setup_final.png" alt="A six-link eel robot inside a 122 by 122 centimeter walled fluid cavity, with maximal-coordinate link poses and joint angles labeled." />
     </div>
@@ -975,7 +998,7 @@ footer a { color: var(--ink-2); }
     We drive each joint with a phase-shifted sinusoid to produce a traveling wave at 1&nbsp;Hz with body wavelength $\lambda = L_B$. Across joint amplitudes from 10&deg; to 40&deg; (20 trials each), our method consistently tracks hardware while the SPH baseline drifts &mdash; the gap widens with amplitude.
   </p>
 
-  <figure class="results-figure reveal">
+  <figure class="results-figure figure-wide reveal">
     <div class="frame">
       <img src="static/images/figure9_eel_forward_swimming_timepoints_final.png" alt="Time-lapse comparison: Hardware, Unified Multiphysics, and Particle-based Simulator at t = 0, 1, 2, 3, 4 seconds." />
     </div>
@@ -987,7 +1010,7 @@ footer a { color: var(--ink-2); }
     </figcaption>
   </figure>
 
-  <figure class="results-figure reveal">
+  <figure class="results-figure figure-wide reveal">
     <div class="frame">
       <img src="static/images/figure8_rmse_comparison_dark.png" alt="Bar charts of head-link RMSE for x1, y1, and theta1 versus undulation amplitude (10, 20, 30, 40 degrees), comparing Unified Multiphysics against the particle-based baseline." />
     </div>
@@ -1026,7 +1049,7 @@ footer a { color: var(--ink-2); }
     We optimize the five bend angles $\bar\theta_{1:5}$, traveling-wave phase $\phi$, and wavelength $\lambda$, while fixing joint amplitude to 25&deg; to avoid the pool wall. Box-constrained L-BFGS uses $10^\circ\!\leq\!\bar\theta_{1:5}\!\leq\!36^\circ$, $-\pi/2\!\leq\!\phi\!\leq\!0$, and $0.5L_B\!\leq\!\lambda\!\leq\!L_B$. Starting from $\bar\theta_{1:5}^{\mathrm{ig}}=10^\circ$, $\phi^{\mathrm{ig}}=-\pi/3$, and $\lambda^{\mathrm{ig}}=0.6L_B$, optimization converges to $[17^\circ,18^\circ,20^\circ,24^\circ,36^\circ]$, $\phi^*=-1.16$, and $\lambda^*=0.57L_B$. The optimized gait executes the desired turn open-loop on hardware; the SPH baseline realizes neither the turn nor the propulsion.
   </p>
 
-  <figure class="results-figure reveal">
+  <figure class="results-figure figure-wide reveal">
     <div class="frame">
       <img src="static/images/figure10_c_start_setup_final.png" alt="C-start gait parameterization showing a bending phase from zero to one second and a propulsion phase from one to three seconds, with bend angles, phase, and wavelength labeled." />
     </div>
@@ -1095,7 +1118,7 @@ footer a { color: var(--ink-2); }
   <p class="reveal">
     The eel robot has <b>6 rigid links</b> (9.8&nbsp;cm each) connected by revolute joints driven by Dynamixel XC330-M288-T servos. It is fully untethered, with an onboard 900&nbsp;mAh battery and a Robotis OpenRB-150 microcontroller in the head link. Buoyant 3D-printed shells house the electronics; thin rigid fins underneath maintain a thin-plate hydrodynamic profile. Head-link pose is tracked by an overhead camera via AprilTags in a 122&nbsp;&times;&nbsp;122&nbsp;cm pool, recreating the simulated walled cavity.
   </p>
-  <figure class="results-figure reveal">
+  <figure class="results-figure figure-compact reveal">
     <div class="frame">
       <img src="static/images/figure7_hardware_setup_v2.png" alt="Hardware setup: a 122 x 122 cm pool with an overhead camera, and an inset showing the eel robot with annotated motors, body shells, fins, and microcontroller." />
     </div>
