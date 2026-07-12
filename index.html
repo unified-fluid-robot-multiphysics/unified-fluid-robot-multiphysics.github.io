@@ -34,16 +34,16 @@
   --ink-2:     #a8b0bc;
   --ink-3:     #6b7380;
   --rule:      #242b36;
-  --accent:    #6bb6e0;
-  --accent-2:  #7cc4ed;
-  --eq-fluid:    #5fb0e0;
-  --eq-robot:    #6cc97a;
-  --eq-coupling: #f0a45e;
-  --eq-pressure: #b690d4;
-  --highlight: #f0a45e;
-  --green-ours:#6cc97a;
-  --orange-bl: #f0a45e;
-  --hw-red:    #ef6e6e;
+  --accent:      #0090e9;
+  --accent-2:    #33a8ed;
+  --eq-fluid:    #0090e9;
+  --eq-robot:    #00ba58;
+  --eq-coupling: #b268da;
+  --eq-pressure: #b268da;
+  --highlight:   #f1ac17;
+  --green-ours:  #00ba58;
+  --orange-bl:   #f1ac17;
+  --hardware:    #e8eaed;
   --max:       980px;
   --max-wide:  1200px;
   --radius:    10px;
@@ -211,7 +211,7 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
 
 .tag-ours      { color: var(--green-ours); font-weight: 600; }
 .tag-baseline  { color: var(--orange-bl); font-weight: 600; }
-.tag-hardware  { color: var(--hw-red); font-weight: 600; }
+.tag-hardware  { color: var(--hardware); font-weight: 600; }
 .tag-fluid     { color: var(--eq-fluid);    font-weight: 600; }
 .tag-robot     { color: var(--eq-robot);    font-weight: 600; }
 .tag-coupling  { color: var(--eq-coupling); font-weight: 600; }
@@ -261,8 +261,8 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
   position: relative;
   margin: 36px 0;
   padding: 28px 28px 22px;
-  background: linear-gradient(180deg, rgba(95,176,224,0.08), rgba(108,201,122,0.05));
-  border: 1px solid rgba(95,176,224,0.22);
+  background: linear-gradient(180deg, rgba(0,144,233,0.08), rgba(0,186,88,0.05));
+  border: 1px solid rgba(0,144,233,0.22);
   border-radius: 12px;
   box-shadow: var(--shadow-sm);
 }
@@ -276,7 +276,7 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
   font-family: 'Newsreader', serif;
   font-style: italic;
   font-size: 0.93rem;
-  border: 1px solid rgba(95,176,224,0.22);
+  border: 1px solid rgba(0,144,233,0.22);
   border-radius: 999px;
 }
 .eq-feature .eq-body { overflow-x: auto; }
@@ -311,9 +311,9 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
   text-transform: uppercase;
   vertical-align: 1px;
 }
-.pill.fluid    { color: var(--eq-fluid);    background: rgba(95,176,224,0.14); }
-.pill.robot    { color: var(--eq-robot);    background: rgba(108,201,122,0.14); }
-.pill.coupling { color: var(--eq-coupling); background: rgba(240,164,94,0.16); }
+.pill.fluid    { color: var(--eq-fluid);    background: rgba(0,144,233,0.14); }
+.pill.robot    { color: var(--eq-robot);    background: rgba(0,186,88,0.14); }
+.pill.coupling { color: var(--eq-coupling); background: rgba(178,104,218,0.16); }
 
 .callout {
   background: var(--surface);
@@ -454,7 +454,7 @@ details.deriv .body { padding: 4px 22px 18px; border-top: 1px solid var(--rule);
 }
 .video-card.ours .label::before     { background: var(--green-ours); }
 .video-card.baseline .label::before { background: var(--orange-bl); }
-.video-card.hw .label::before       { background: var(--hw-red); }
+.video-card.hw .label::before       { background: var(--hardware); }
 .video-card video, .video-card img { width: 100%; display: block; aspect-ratio: 1 / 1; object-fit: cover; background: var(--bg-soft); }
 .video-card.rotate-ccw img { transform: rotate(-90deg); }
 
@@ -492,7 +492,7 @@ details.deriv .body { padding: 4px 22px 18px; border-top: 1px solid var(--rule);
   color: var(--ink-2);
   padding-right: 6px;
 }
-.timeline-strip .row.hw       .row-label { color: var(--hw-red); }
+.timeline-strip .row.hw       .row-label { color: var(--hardware); }
 .timeline-strip .row.ours     .row-label { color: var(--green-ours); }
 .timeline-strip .row.baseline .row-label { color: var(--orange-bl); }
 .timeline-strip .cell {
@@ -644,7 +644,7 @@ footer a { color: var(--ink-2); }
       <img src="static/images/figure2_problem_setup_final.png" alt="Unified least-action overview showing an articulated robot moving through the surrounding fluid velocity field." />
     </div>
     <figcaption>
-      Problem setting. A controlled articulated robot with geometry $Gamma$ moves through an incompressible Newtonian fluid occupying $Omega$. The no-slip condition on the shared interface must transmit motion and force consistently in both directions.
+      Problem setting. A controlled articulated robot with geometry $\Gamma$ moves through an incompressible Newtonian fluid occupying $\Omega$. The no-slip condition on the shared interface must transmit motion and force consistently in both directions.
     </figcaption>
   </figure>
 
@@ -745,8 +745,8 @@ footer a { color: var(--ink-2); }
     <div class="eq-body">
       $$\begin{aligned}
         \min_{q^r,\,v^r,\,q^f,\,v^f}\;\; & \int_{t_0}^{t_f}\!
-          \color{#5fb0e0}{L^f(q^f,v^f)}
-          + \color{#6cc97a}{L^r(q^r,v^r)}
+          \color{#0090e9}{L^f(q^f,v^f)}
+          + \color{#00ba58}{L^r(q^r,v^r)}
           + F(t)^\top q^f \, dt \\[2pt]
         \text{s.t.}\;\;
           & c_1(v^f)=\dot q^f - v^f(q^f)=0 && \forall\, q^f\in\Omega \\
@@ -754,7 +754,7 @@ footer a { color: var(--ink-2); }
           & c_3(v^f)=v^f - v_{bc}=0 && \forall\, q^f\in\partial\Omega \\
           & c_4(v^r)=\dot q^r - v^r=0 && \forall\, q^r \\
           & c_5(q^r)=0 && \forall\, q^r \\
-          & \color{#f0a45e}{c_6(v^f,v^r)=v^f - {}^bv^r=0} && \forall\, q^f\in\Gamma
+          & \color{#b268da}{c_6(v^f,v^r)=v^f - {}^bv^r=0} && \forall\, q^f\in\Gamma
       \end{aligned}$$
     </div>
     <div class="eq-num-r">(6)</div>
@@ -771,7 +771,7 @@ footer a { color: var(--ink-2); }
   <div class="eq fluid reveal">
     $$\rho\!\left(\dot v^f + (v^f\!\cdot\!\nabla) v^f\right)
       = -\nabla p + \mu\nabla^2 v^f - \rho g
-      \;\color{#f0a45e}{- \tfrac{\partial c_3}{\partial v^f}^{\!\!\top}\!\dot\lambda_3
+      \;\color{#b268da}{- \tfrac{\partial c_3}{\partial v^f}^{\!\!\top}\!\dot\lambda_3
                         - \tfrac{\partial c_6}{\partial v^f}^{\!\!\top}\!\dot\lambda_6}$$
     <span class="eq-num">(7)</span>
   </div>
@@ -784,7 +784,7 @@ footer a { color: var(--ink-2); }
   <div class="eq robot reveal">
     $$M^r \dot v^r + \rho g
       = \tfrac{\partial c_5}{\partial q^r}^{\!\!\top}\!\lambda_5
-      \;\color{#f0a45e}{-\, \tfrac{\partial c_6}{\partial v^r}^{\!\!\top}\!\dot\lambda_6},
+      \;\color{#b268da}{-\, \tfrac{\partial c_6}{\partial v^r}^{\!\!\top}\!\dot\lambda_6},
       \qquad \dot q^r = v^r$$
     <span class="eq-num">(9)</span>
   </div>
@@ -792,7 +792,7 @@ footer a { color: var(--ink-2); }
   <div class="callout reveal">
     <span class="label">Where the coupling lives</span>
     <p>
-      The <span class="tag-coupling">orange terms</span> in&nbsp;(7) and&nbsp;(9) share the <em>same</em> dual variable $\lambda_6$. The pressure $p \equiv \dot\lambda_2$ is itself the multiplier that enforces $\nabla\!\cdot v^f=0$ &mdash; a fact Lagrange noted in his <em>M&eacute;canique analytique</em>. Boundary conditions and the no-slip interface inherit the same constraint-with-dual-variable structure that Allmaras (2005) used for compressible aerodynamics.
+      The <span class="tag-coupling">purple terms</span> in&nbsp;(7) and&nbsp;(9) share the <em>same</em> dual variable $\lambda_6$. The pressure $p \equiv \dot\lambda_2$ is itself the multiplier that enforces $\nabla\!\cdot v^f=0$ &mdash; a fact Lagrange noted in his <em>M&eacute;canique analytique</em>. Boundary conditions and the no-slip interface inherit the same constraint-with-dual-variable structure that Allmaras (2005) used for compressible aerodynamics.
     </p>
   </div>
 
@@ -827,7 +827,7 @@ footer a { color: var(--ink-2); }
   <div class="eq robot reveal">
     $$\tfrac{1}{2}M^r \bv^r_{k+1}
       \,-\, h\!\left(\tfrac{\partial c_5}{\partial q^r_k}\right)^{\!\!\top}\!\lambda_{5,k}
-      \,\color{#f0a45e}{-\, h\!\left(\tfrac{\partial c_6}{\partial \bv^r_k}\right)^{\!\!\top}\!\lambda_{6,k}}
+      \,\color{#b268da}{-\, h\!\left(\tfrac{\partial c_6}{\partial \bv^r_k}\right)^{\!\!\top}\!\lambda_{6,k}}
       = \tfrac{1}{2}M^r \bv^r_k - h M^r g$$
     <span class="eq-num">(12)</span>
   </div>
@@ -836,9 +836,9 @@ footer a { color: var(--ink-2); }
     $$\begin{aligned}
       \tfrac{1}{2}(M^f - \mu h L)\bv^f_{k+1}
         &- \tfrac{h}{2} N(\bv^f_{k+1})
-         + \color{#b690d4}{G\, p_k}
+         + \color{#b268da}{G\, p_k}
          + B\,\lambda_{3,k}
-         \color{#f0a45e}{- h\!\left(\tfrac{\partial c_6}{\partial \bv^f_k}\right)^{\!\!\top}\!\lambda_{6,k}} \\
+         \color{#b268da}{- h\!\left(\tfrac{\partial c_6}{\partial \bv^f_k}\right)^{\!\!\top}\!\lambda_{6,k}} \\
         &\quad = \tfrac{1}{2}(M^f + \mu h L)\bv^f_k + \tfrac{h}{2}N(\bv^f_k) - h M^f g
     \end{aligned}$$
     <span class="eq-num">(13)</span>
