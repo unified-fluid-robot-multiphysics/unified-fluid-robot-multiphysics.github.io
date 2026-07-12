@@ -805,6 +805,15 @@ footer a { color: var(--ink-2); }
     in which the velocity $\bv_k$ lives <em>between</em> the configurations $q_k$ and $q_{k+1}$. For pure rigid-body simulation this half-step delay is harmless. For our problem it is not: the fluid is represented as a velocity field $\bv^f$ while the robot pose lives in $q^r$, and the no-slip constraint must couple them at a consistent time.
   </p>
 
+  <figure class="method-figure reveal">
+    <div class="frame">
+      <img src="static/images/figure4_variational_integrator_dark.png" alt="Midpoint variational integrator showing robot configurations at integer time steps and fluid velocity fields at half time steps, creating a temporal mismatch." />
+    </div>
+    <figcaption>
+      Temporal mismatch in a conventional midpoint variational integrator. Robot configurations $q_k$ are defined at integer time steps, while the fluid velocity $\bar v_k$ is evaluated at the midpoint of each interval. Our formulation integrates the full fluid&ndash;robot variational state while enforcing each constraint at the time where its variables naturally live.
+    </figcaption>
+  </figure>
+
   <p class="reveal">
     Marsden &amp; West (2001) resolve this via the discrete Legendre transform, which is awkward in the presence of constraints. We instead define every constraint at the time step at which its variable naturally lives ($q_k$ for the robot, $\bv_k$ for the fluid), and rewrite the discrete Euler&ndash;Lagrange relation directly via the chain rule:
   </p>
@@ -876,6 +885,15 @@ footer a { color: var(--ink-2); }
     discretized as $\;E v^f - {}^bv^r = 0,\;$ with a convolution matrix $E$ built from a smoothed delta. This satisfies no-slip only at a finite set of boundary nodes &mdash; allowing fluid penetration when nodes are sparse, and producing redundant, ill-conditioned constraints when nodes from neighboring bodies overlap. Both pathologies are common in articulated robots.
   </p>
 
+  <figure class="method-figure reveal">
+    <div class="frame">
+      <img src="static/images/figure5_integral_immersed_boundary_dark.png" alt="Immersed-boundary coupling between an articulated robot and a fluid grid, comparing the original pointwise no-slip constraint with the proposed integral-form constraint along each body segment." />
+    </div>
+    <figcaption>
+      Multibody immersed-boundary coupling. The original formulation matches fluid and robot velocity only at discrete boundary nodes, which can permit penetration between sparse nodes or become singular when nodes overlap. Integrating the constraint along each body segment produces a weak-form no-slip condition that remains well-conditioned for articulated robots.
+    </figcaption>
+  </figure>
+
   <p class="reveal">
     We instead integrate the constraint along the whole boundary $\Gamma$:
   </p>
@@ -945,10 +963,10 @@ footer a { color: var(--ink-2); }
 
   <figure class="results-figure reveal">
     <div class="frame">
-      <img src="static/images/figure6_environment_setup_dark.png" alt="A six-link eel robot inside a 122 by 122 centimeter walled fluid cavity, with maximal-coordinate link poses and joint angles labeled." />
+      <img src="static/images/figure6_environment_setup_final.png" alt="A six-link eel robot inside a 122 by 122 centimeter walled fluid cavity, with maximal-coordinate link poses and joint angles labeled." />
     </div>
     <figcaption>
-      Matched simulation environment. Each link configuration is parameterized by $(x_i,y_i,\theta_i)$ and adjacent links are connected by the commanded joint angles $\bar\theta_i$.
+      Matched simulation environment. The eel swims in a 122&nbsp;&times;&nbsp;122&nbsp;cm walled cavity of initially still water. Its six 9.8&nbsp;cm rigid links are represented in maximal coordinates $(x_i,y_i,\theta_i)$ and connected by commanded revolute-joint angles $\bar\theta_i$.
     </figcaption>
   </figure>
 
@@ -1010,10 +1028,10 @@ footer a { color: var(--ink-2); }
 
   <figure class="results-figure reveal">
     <div class="frame">
-      <img src="static/images/figure10_c_start_setup_dark.png" alt="C-start gait parameterization showing a bending phase from zero to one second and a propulsion phase from one to three seconds, with bend angles, phase, and wavelength labeled." />
+      <img src="static/images/figure10_c_start_setup_final.png" alt="C-start gait parameterization showing a bending phase from zero to one second and a propulsion phase from one to three seconds, with bend angles, phase, and wavelength labeled." />
     </div>
     <figcaption>
-      C-start parameterization. Bend angles define the initial curl; phase and wavelength define the traveling wave that generates reorientation and propulsion.
+      C-start parameterization. During the bending phase (0&ndash;1&nbsp;s), the five joint angles $\bar\theta_{1:5}$ curl the eel into a C-shape. During the propulsion phase (1&ndash;3&nbsp;s), the wave phase $\phi$ and wavelength $\lambda$ govern rapid straightening and a tailward traveling wave that produces reorientation and acceleration.
     </figcaption>
   </figure>
 
