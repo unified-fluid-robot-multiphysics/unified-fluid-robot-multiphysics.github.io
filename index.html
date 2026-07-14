@@ -768,8 +768,8 @@ footer a { color: var(--ink-2); }
     <div class="eq-body">
       $$\begin{aligned}
         \min_{q^r,\,v^r,\,q^f,\,v^f}\;\; & \int_{t_0}^{t_f}\!
-          \color{#0090e9}{L^f(q^f,v^f)}
-          + \color{#00ba58}{L^r(q^r,v^r)}
+          \textcolor{#0090e9}{L^f(q^f,v^f)}
+          + \textcolor{#00ba58}{L^r(q^r,v^r)}
           + F(t)^\top q^f \, dt \\[2pt]
         \text{s.t.}\;\;
           & c_1(v^f)=\dot q^f - v^f(q^f)=0 && \forall\, q^f\in\Omega \\
@@ -777,7 +777,7 @@ footer a { color: var(--ink-2); }
           & c_3(v^f)=v^f - v_{bc}=0 && \forall\, q^f\in\partial\Omega \\
           & c_4(v^r)=\dot q^r - v^r=0 && \forall\, q^r \\
           & c_5(q^r)=0 && \forall\, q^r \\
-          & \color{#b268da}{c_6(v^f,v^r)=v^f - {}^bv^r=0} && \forall\, q^f\in\Gamma
+          & \textcolor{#b268da}{c_6(v^f,v^r)=v^f - {}^bv^r=0} && \forall\, q^f\in\Gamma
       \end{aligned}$$
     </div>
     <div class="eq-num-r">(6)</div>
@@ -794,8 +794,8 @@ footer a { color: var(--ink-2); }
   <div class="eq fluid reveal">
     $$\rho\!\left(\dot v^f + (v^f\!\cdot\!\nabla) v^f\right)
       = -\nabla p + \mu\nabla^2 v^f - \rho g
-      \;\color{#b268da}{- \tfrac{\partial c_3}{\partial v^f}^{\!\!\top}\!\dot\lambda_3
-                        - \tfrac{\partial c_6}{\partial v^f}^{\!\!\top}\!\dot\lambda_6}$$
+      \;- \tfrac{\partial c_3}{\partial v^f}^{\!\!\top}\!\dot\lambda_3
+      \;\textcolor{#b268da}{- \tfrac{\partial c_6}{\partial v^f}^{\!\!\top}\!\dot\lambda_6}$$
     <span class="eq-num">(7)</span>
   </div>
 
@@ -807,7 +807,7 @@ footer a { color: var(--ink-2); }
   <div class="eq robot reveal">
     $$M^r \dot v^r + \rho g
       = \tfrac{\partial c_5}{\partial q^r}^{\!\!\top}\!\lambda_5
-      \;\color{#b268da}{-\, \tfrac{\partial c_6}{\partial v^r}^{\!\!\top}\!\dot\lambda_6},
+      \;\textcolor{#b268da}{-\, \tfrac{\partial c_6}{\partial v^r}^{\!\!\top}\!\dot\lambda_6},
       \qquad \dot q^r = v^r$$
     <span class="eq-num">(9)</span>
   </div>
@@ -859,7 +859,7 @@ footer a { color: var(--ink-2); }
   <div class="eq robot reveal">
     $$\tfrac{1}{2}M^r \bv^r_{k+1}
       \,-\, h\!\left(\tfrac{\partial c_5}{\partial q^r_k}\right)^{\!\!\top}\!\lambda_{5,k}
-      \,\color{#b268da}{-\, h\!\left(\tfrac{\partial c_6}{\partial \bv^r_k}\right)^{\!\!\top}\!\lambda_{6,k}}
+      \,\textcolor{#b268da}{-\, h\!\left(\tfrac{\partial c_6}{\partial \bv^r_k}\right)^{\!\!\top}\!\lambda_{6,k}}
       = \tfrac{1}{2}M^r \bv^r_k - h M^r g$$
     <span class="eq-num">(12)</span>
   </div>
@@ -868,9 +868,9 @@ footer a { color: var(--ink-2); }
     $$\begin{aligned}
       \tfrac{1}{2}(M^f - \mu h L)\bv^f_{k+1}
         &- \tfrac{h}{2} N(\bv^f_{k+1})
-         + \color{#b268da}{G\, p_k}
+         + G\, p_k
          + B\,\lambda_{3,k}
-         \color{#b268da}{- h\!\left(\tfrac{\partial c_6}{\partial \bv^f_k}\right)^{\!\!\top}\!\lambda_{6,k}} \\
+         \textcolor{#b268da}{- h\!\left(\tfrac{\partial c_6}{\partial \bv^f_k}\right)^{\!\!\top}\!\lambda_{6,k}} \\
         &\quad = \tfrac{1}{2}(M^f + \mu h L)\bv^f_k + \tfrac{h}{2}N(\bv^f_k) - h M^f g
     \end{aligned}$$
     <span class="eq-num">(13)</span>
@@ -1150,10 +1150,6 @@ footer a { color: var(--ink-2); }
     </article>
   </div>
 
-  <div class="callout reveal">
-    <span class="label">Takeaway</span>
-    <p>Representation and coupling matter: deriving, integrating, and differentiating the fluid and robot as one constrained system produces swimming behavior that aligns far more closely with hardware and enables gradient-based optimization of dynamic maneuvers.</p>
-  </div>
 </section>
 
 <!-- ============================================================ BIBTEX ============================================================ -->
