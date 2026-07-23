@@ -14,6 +14,7 @@ __pycache__/
 
 # Local previews / build artifacts
 .cache/
+tmp/
 node_modules/
 
 # Raw media kept locally but not in git (optional —
