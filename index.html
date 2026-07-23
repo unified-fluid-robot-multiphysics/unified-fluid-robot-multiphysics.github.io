@@ -7,7 +7,7 @@
 
 <!-- Open Graph / social -->
 <meta property="og:title" content="Realizing Robotic Swimming with Unified Fluid Robot Multiphysics" />
-<meta property="og:description" content="A differentiable framework that derives strongly coupled fluid-robot dynamics from a single Lagrangian, enabling sim-to-real transfer of undulatory swimming and a C-start escape on a bioinspired eel robot." />
+<meta property="og:description" content="RSS 2026 Outstanding Paper Award Finalist and Outstanding Student Paper Award Finalist (Top 8). A differentiable framework for unified fluid-robot dynamics and sim-to-real robotic swimming." />
 <meta property="og:image" content="static/images/rsswebfig1.jpg" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -114,8 +114,38 @@ p.lead { color: var(--ink-2); font-size: 1.04rem; }
   border: 1px solid rgba(107, 182, 224, 0.4);
   padding: 4px 14px;
   border-radius: 999px;
-  margin-bottom: 36px;
+  margin-bottom: 18px;
   background: rgba(107, 182, 224, 0.08);
+}
+.awards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 34px;
+}
+.award {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  border: 1px solid rgba(240, 164, 94, 0.45);
+  border-radius: 999px;
+  color: #f4bc86;
+  background: rgba(240, 164, 94, 0.1);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+.award::before { content: "\2605"; color: var(--highlight); font-size: 0.86em; }
+.award-rank {
+  flex-basis: 100%;
+  margin-top: 1px;
+  color: var(--ink-2);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 0.96rem;
+  font-style: italic;
 }
 .hero h1 {
   font-family: "Newsreader", Georgia, serif;
@@ -218,20 +248,6 @@ figcaption b { font-style: normal; font-weight: 600; color: var(--ink); }
 
 /* Abstract -- drop cap REMOVED per request */
 .abstract p { font-size: 1.05rem; color: var(--ink); }
-
-/* Video Overview */
-#video { padding: 48px 0 52px; }
-#video .section-title { margin-bottom: 22px; }
-.video-overview { margin: 0; }
-.video-overview .frame {
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-.video-overview video { width: 100%; display: block; }
-.video-overview figcaption { margin-top: 16px; max-width: 720px; }
 
 /* Method */
 .method-figure { margin: 12px 0 28px; }
@@ -540,19 +556,674 @@ footer a { color: var(--ink-2); }
 @media (max-width: 640px) {
   section { padding: 44px 0; }
   .hero { padding: 56px 0 24px; }
+  .awards { margin-bottom: 26px; }
+  .award { font-size: 0.75rem; }
   .timeline-strip .row, .timeline-strip .header { grid-template-columns: 60px repeat(7, 1fr); }
   .timeline-strip .row-label { font-size: 0.72rem; }
   .eq { font-size: 0.94rem; padding-right: 50px; }
   .eq .eq-num { right: 10px; font-size: 0.78rem; }
+}
+
+/* ========== Course-site-inspired research guide ========== */
+:root {
+  --bg: #0a0d12;
+  --bg-soft: #131820;
+  --bg-tint: #161c26;
+  --surface: #141a23;
+  --ink: #e8eaed;
+  --ink-2: #a8b0bc;
+  --ink-3: #6b7380;
+  --rule: #242b36;
+  --accent: #6bb6e0;
+  --accent-2: #7cc4ed;
+  --highlight: #f0a45e;
+  --green-ours: #6cc97a;
+  --orange-bl: #f0a45e;
+  --hw-red: #ef6e6e;
+  --brand: #6bb6e0;
+  --brand-dark: #0a0d12;
+  --header-h: 72px;
+  --sidebar-w: 252px;
+  --rail-w: 236px;
+  --radius: 8px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.5), 0 1px 1px rgba(0,0,0,.35);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.55), 0 1px 3px rgba(0,0,0,.35);
+}
+
+html { scroll-padding-top: calc(var(--header-h) + 22px); }
+body {
+  font-size: 16px;
+  line-height: 1.72;
+  background: var(--bg);
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 12px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--brand-dark);
+  transform: translateY(-150%);
+}
+.skip-link:focus { transform: translateY(0); }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--header-h);
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  background: linear-gradient(100deg, #080b0f, #101720 54%, #142431);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .4);
+}
+.site-header-inner {
+  width: min(100%, 1680px);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.site-brand {
+  min-width: 0;
+  color: #fff;
+  text-decoration: none;
+}
+.site-brand:hover { color: #fff; text-decoration: none; }
+.institution-logos {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  padding-right: 14px;
+  border-right: 1px solid rgba(255,255,255,.35);
+  background: #000;
+}
+.affiliation-strip {
+  display: block;
+  height: 42px;
+  width: auto;
+  max-width: none;
+}
+.site-name {
+  overflow: hidden;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.18rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.site-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.site-actions a {
+  padding: 8px 11px;
+  border-radius: 5px;
+  color: rgba(255,255,255,.82);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+.site-actions a:hover {
+  color: #fff;
+  background: rgba(255,255,255,.12);
+  text-decoration: none;
+}
+.menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.32);
+  border-radius: 5px;
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  cursor: pointer;
+}
+.menu-toggle span,
+.menu-toggle::before,
+.menu-toggle::after {
+  content: "";
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 4px auto;
+  border-radius: 9px;
+  background: currentColor;
+}
+
+.site-shell {
+  width: min(100%, 1680px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--rail-w);
+  align-items: start;
+  background: var(--bg);
+  box-shadow: 0 0 0 1px var(--rule);
+}
+.site-sidebar,
+.context-rail {
+  position: sticky;
+  top: var(--header-h);
+  max-height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+}
+.site-sidebar {
+  grid-column: 1;
+  padding: 38px 24px 34px 28px;
+}
+.sidebar-eyebrow,
+.rail-eyebrow {
+  margin: 0 0 13px;
+  color: var(--ink-3);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.sidebar-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li + li { margin-top: 2px; }
+.sidebar-nav a {
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 8px 10px 8px 12px;
+  border-radius: 5px;
+  color: var(--ink-2);
+  font-size: .88rem;
+  line-height: 1.35;
+}
+.sidebar-nav a:hover {
+  color: var(--accent-2);
+  background: rgba(107,182,224,.07);
+  text-decoration: none;
+}
+.sidebar-nav a.active {
+  color: var(--accent-2);
+  background: rgba(107,182,224,.12);
+  font-weight: 650;
+}
+.sidebar-nav a.active::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  left: 0;
+  width: 3px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+.nav-index {
+  min-width: 1.65em;
+  color: var(--ink-3);
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: .68rem;
+  letter-spacing: -.02em;
+}
+.sidebar-subnav {
+  margin: 4px 0 8px 22px !important;
+  padding-left: 12px !important;
+  border-left: 1px solid var(--rule);
+}
+.sidebar-subnav a {
+  padding: 5px 7px;
+  font-size: .76rem;
+}
+.sidebar-note {
+  margin-top: 28px;
+  padding: 15px;
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  color: var(--ink-2);
+  background: rgba(255,255,255,.025);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: .87rem;
+  line-height: 1.5;
+}
+.sidebar-note strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-family: "Geist", sans-serif;
+  font-size: .76rem;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.site-main {
+  grid-column: 2;
+  min-width: 0;
+  border-right: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  background: var(--bg);
+}
+.site-main > .wrap,
+.site-main > .wrap-wide {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding-right: clamp(30px, 5vw, 72px);
+  padding-left: clamp(30px, 5vw, 72px);
+}
+.site-main > section {
+  padding-top: 68px;
+  padding-bottom: 68px;
+}
+.site-main > section + section { border-top: 1px solid var(--rule); }
+
+.hero {
+  max-width: none !important;
+  min-height: 660px;
+  padding-top: 86px !important;
+  padding-bottom: 74px !important;
+  text-align: left;
+  isolation: isolate;
+  color: #fff;
+  background:
+    radial-gradient(circle at 84% 42%, rgba(47,149,196,.2), transparent 34%),
+    radial-gradient(circle at 64% 118%, rgba(107,182,224,.08), transparent 38%),
+    linear-gradient(145deg, #090c10, #0d141c 58%, #101c25);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(104,190,229,.7), transparent);
+}
+.hero > *:not(.hero-gif) { max-width: 780px; }
+.hero .venue {
+  color: var(--accent);
+  border-color: rgba(107,182,224,.4);
+  background: rgba(107,182,224,.08);
+}
+.awards {
+  justify-content: flex-start;
+  max-width: 780px;
+  margin-right: 0;
+  margin-left: 0;
+}
+.award { color: #f4bc86; }
+.award-rank { color: var(--ink-2); }
+.hero h1 {
+  margin-right: 0;
+  margin-left: 0;
+  color: var(--ink);
+  font-size: clamp(2.65rem, 3.6vw, 4.65rem);
+  line-height: 1.08;
+  letter-spacing: -.025em;
+}
+.hero h1 em { color: var(--accent); }
+.hero .authors,
+.hero .authors a { color: var(--ink); }
+.hero .affil { color: var(--ink-2); }
+.hero .equal-note { color: var(--ink-3); }
+.hero .buttons { justify-content: flex-start; }
+.hero .btn {
+  border-color: var(--ink);
+  color: var(--bg);
+  background: var(--ink);
+}
+.hero .btn:hover {
+  border-color: var(--accent);
+  color: #fff;
+  background: var(--accent);
+}
+.hero .btn.ghost {
+  color: var(--ink);
+  background: transparent;
+}
+.hero .btn.ghost:hover {
+  color: var(--bg);
+  background: var(--ink);
+}
+.hero-gif {
+  top: 50%;
+  left: auto;
+  right: -90px;
+  transform: translateY(-50%) rotate(-90deg);
+  opacity: .48;
+}
+.hero-gif img { width: 440px; }
+
+.teaser { padding-top: 44px !important; }
+.teaser .frame,
+.method-figure .frame,
+.results-figure .frame,
+.video-card {
+  border-color: var(--rule);
+  background: var(--surface);
+}
+.teaser .frame {
+  padding: 12px;
+  border-radius: 10px;
+}
+.teaser figcaption {
+  max-width: 830px;
+  margin-top: 18px;
+}
+
+h2.section-title {
+  margin-bottom: 32px;
+  color: var(--ink);
+  font-size: clamp(2rem, 1.7rem + .7vw, 2.55rem);
+  line-height: 1.14;
+}
+.section-kicker {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brand);
+  font-family: "Geist", sans-serif;
+  font-size: .7rem;
+  font-weight: 750;
+  letter-spacing: .14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+h3 {
+  scroll-margin-top: calc(var(--header-h) + 25px);
+  color: var(--ink);
+}
+h3 .num { color: var(--brand); }
+.abstract {
+  position: relative;
+}
+.abstract::before {
+  content: "Research question";
+  display: inline-block;
+  margin-bottom: 18px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  color: var(--accent-2);
+  background: rgba(107,182,224,.09);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.abstract p:first-of-type {
+  color: var(--ink);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.28rem;
+  line-height: 1.64;
+}
+
+.eq { border-left-width: 3px; }
+.eq-feature .eq-tag { background: var(--bg); }
+.callout,
+details.deriv,
+.timeline-strip {
+  background: var(--surface);
+}
+.contributions li {
+  min-height: 122px;
+  border-top: 1px solid var(--rule);
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg-soft);
+}
+.bibtex-block {
+  color: var(--ink);
+  border-color: var(--rule);
+  background: var(--bg-soft);
+}
+.copy-btn {
+  color: var(--ink);
+  background: rgba(255,255,255,.08);
+}
+
+.context-rail {
+  grid-column: 3;
+  padding: 38px 24px;
+}
+.rail-card {
+  margin-bottom: 26px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--rule);
+}
+.rail-card:last-child { border-bottom: 0; }
+.rail-card h2 {
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+.rail-card p {
+  margin-bottom: 10px;
+  color: var(--ink-2);
+  font-size: .79rem;
+  line-height: 1.55;
+}
+.rail-stat {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 10px;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid var(--rule);
+}
+.rail-stat strong {
+  color: var(--brand);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.rail-stat span {
+  color: var(--ink-2);
+  font-size: .73rem;
+  line-height: 1.35;
+}
+.research-map {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.research-map li {
+  position: relative;
+  padding: 0 0 16px 25px;
+  color: var(--ink-2);
+  font-size: .77rem;
+  line-height: 1.45;
+}
+.research-map li::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 3px;
+  width: 7px;
+  height: 7px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  background: var(--bg);
+}
+.research-map li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 15px;
+  bottom: -3px;
+  left: 7px;
+  width: 1px;
+  background: var(--rule);
+}
+.research-map b {
+  display: block;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+footer {
+  color: var(--ink-3);
+  border-top: 0;
+  background: var(--bg-soft);
+}
+footer .wrap { max-width: 1180px; }
+
+@media (max-width: 1260px) {
+  .site-shell { grid-template-columns: var(--sidebar-w) minmax(0, 1fr); }
+  .context-rail { display: none; }
+  .site-main { border-right: 0; }
+}
+
+@media (max-width: 900px) {
+  :root { --header-h: 64px; }
+  .site-header-inner { padding: 0 18px; }
+  .menu-toggle { display: block; }
+  .institution-logos { padding-right: 10px; }
+  .affiliation-strip { height: 32px; }
+  .site-name { font-size: 1.05rem; }
+  .site-actions a:not(:last-child) { display: none; }
+  .site-shell { display: block; }
+  .site-sidebar {
+    position: fixed;
+    z-index: 45;
+    top: var(--header-h);
+    bottom: 0;
+    left: 0;
+    width: min(84vw, 320px);
+    max-height: none;
+    padding-top: 28px;
+    background: var(--bg);
+    box-shadow: 14px 0 32px rgba(22,31,39,.18);
+    transform: translateX(-110%);
+    transition: transform .22s ease;
+  }
+  body.nav-open { overflow: hidden; }
+  body.nav-open .site-sidebar { transform: translateX(0); }
+  body.nav-open::after {
+    content: "";
+    position: fixed;
+    z-index: 40;
+    inset: var(--header-h) 0 0;
+    background: rgba(12,20,27,.48);
+  }
+  .site-main { border: 0; }
+}
+
+@media (max-width: 640px) {
+  .site-actions { display: none; }
+  .site-main > .wrap,
+  .site-main > .wrap-wide {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .site-main > section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .hero {
+    min-height: 610px;
+    padding-top: 62px !important;
+    padding-bottom: 56px !important;
+  }
+  .hero h1 {
+    font-size: clamp(2.2rem, 11vw, 3.15rem);
+    line-height: 1.07;
+  }
+  .hero-gif {
+    right: -135px;
+    opacity: .25;
+  }
+  .hero-gif img { width: 340px; }
+  .authors { font-size: 1.08rem; }
+  .affil { font-size: 1.04rem; }
+  .awards { gap: 6px; }
+  .award { padding: 5px 9px; }
+  .abstract p:first-of-type { font-size: 1.15rem; }
+  .teaser .frame { padding: 5px; }
+  .contributions { grid-template-columns: 1fr; }
+  .contributions li { min-height: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .reveal { opacity: 1; transform: none; }
 }
 </style>
 </head>
 
 <body>
 
+<a class="skip-link" href="#content">Skip to paper content</a>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <button class="menu-toggle" type="button" aria-label="Open paper navigation" aria-controls="site-navigation" aria-expanded="false"><span></span></button>
+    <div class="institution-logos" aria-label="Conference and institutional affiliations">
+      <img class="affiliation-strip" src="static/images/affiliation-logos-black.png" alt="RSS 2026, Carnegie Mellon University, and MIT" />
+    </div>
+    <a class="site-brand" href="#top" aria-label="Unified Fluid Robot Multiphysics home">
+      <span class="site-name">Unified Fluid&ndash;Robot Multiphysics</span>
+    </a>
+    <nav class="site-actions" aria-label="Research links">
+      <a href="#abstract">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+    </nav>
+  </div>
+</header>
+
+<div class="site-shell" id="top">
+  <aside class="site-sidebar" id="site-navigation" aria-label="Paper navigation">
+    <p class="sidebar-eyebrow">Paper guide</p>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#overview"><span class="nav-index">00</span>Overview</a></li>
+        <li><a href="#abstract"><span class="nav-index">01</span>Abstract</a></li>
+        <li>
+          <a href="#method"><span class="nav-index">02</span>Method</a>
+          <ul class="sidebar-subnav">
+            <li><a href="#method-least-action">Least action</a></li>
+            <li><a href="#method-unified">Unified Lagrangian</a></li>
+            <li><a href="#method-integrator">Variational integrator</a></li>
+            <li><a href="#method-boundary">Immersed boundary</a></li>
+          </ul>
+        </li>
+        <li><a href="#results"><span class="nav-index">03</span>Results</a></li>
+        <li><a href="#hardware"><span class="nav-index">04</span>Hardware</a></li>
+        <li><a href="#bibtex"><span class="nav-index">05</span>Citation</a></li>
+        <li><a href="#ack"><span class="nav-index">06</span>Acknowledgments</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-note">
+      <strong>RSS 2026</strong>
+      Outstanding Paper and Outstanding Student Paper Award Finalist.
+    </div>
+  </aside>
+
+  <main class="site-main" id="content">
+
 <!-- ============================================================ HERO ============================================================ -->
-<header class="hero wrap">
+<header class="hero wrap" id="overview">
   <div class="venue reveal">Robotics: Science and Systems &middot; 2026</div>
+
+  <div class="awards reveal" aria-label="RSS 2026 award recognition">
+    <span class="award">Outstanding Paper Award Finalist</span>
+    <span class="award">Outstanding Student Paper Award Finalist</span>
+    <span class="award-rank">Selected among the Top 8 papers</span>
+  </div>
 
   <h1 class="reveal">
     Realizing Robotic Swimming with<br>
@@ -576,7 +1247,6 @@ footer a { color: var(--ink-2); }
   <div class="buttons reveal">
     <a class="btn" href="#"><span class="arxiv-mark">arXiv</span></a>
     <a class="btn" href="#"><svg class="icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.5-2.5-.3-5.2-1.3-5.2-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.4.1-3 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.6.2 2.7.1 3 .8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.2 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>Code</a>
-    <a class="btn" href="#"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>Video</a>
     <a class="btn ghost" href="#bibtex"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 0 1 2-2h12v14H6a2 2 0 0 0-2 2z"/><path d="M8 7h8M8 11h6"/></svg>BibTeX</a>
   </div>
 </header>
@@ -598,7 +1268,7 @@ footer a { color: var(--ink-2); }
 
 <!-- ============================================================ ABSTRACT ============================================================ -->
 <section class="abstract wrap" id="abstract">
-  <h2 class="section-title reveal">Abstract</h2>
+  <h2 class="section-title reveal"><span class="section-kicker">01 &middot; Motivation</span>Abstract</h2>
   <p class="reveal">
     Matching the swimming efficiency and agility of fish has remained an elusive goal in underwater robotics. Such locomotion relies on complex vortex interactions between the robot's body and the surrounding fluid, governed by coupled ordinary and partial differential equations &mdash; significantly more difficult than the multi-body dynamics of classical rigid robotic systems.
   </p>
@@ -610,25 +1280,9 @@ footer a { color: var(--ink-2); }
   </p>
 </section>
 
-<!-- ============================================================ VIDEO ============================================================ -->
-<section class="wrap" id="video">
-  <h2 class="section-title reveal">Video Overview</h2>
-  <figure class="video-overview reveal">
-    <div class="frame">
-      <video controls preload="metadata" playsinline>
-        <source src="static/videos/supplemental_video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-    <figcaption>
-      Full supplemental video &mdash; an end-to-end walkthrough of the unified Lagrangian formulation, the discrete variational integrator, simulation results, and hardware experiments on the eel robot.
-    </figcaption>
-  </figure>
-</section>
-
 <!-- ============================================================ METHOD ============================================================ -->
 <section class="wrap" id="method">
-  <h2 class="section-title reveal">Method</h2>
+  <h2 class="section-title reveal"><span class="section-kicker">02 &middot; Formulation</span>Method</h2>
 
   <p class="lead reveal">
     Existing multiphysics simulators time-integrate the fluid and robot equations <em>separately</em>, then couple them through an explicit force term. We instead pose the entire problem as a <b>single least-action optimization</b>: the unified Lagrangian is discretized directly, and the coupling forces emerge as Lagrange multipliers of a no-slip constraint.
@@ -644,7 +1298,7 @@ footer a { color: var(--ink-2); }
   </figure>
 
   <!-- §1 -->
-  <h3 class="reveal"><span class="num">1.</span>From least action to the manipulator equation</h3>
+  <h3 class="reveal" id="method-least-action"><span class="num">1.</span>From least action to the manipulator equation</h3>
 
   <p class="reveal">
     For a system with configuration $q(t)\in\R^n$, velocity $v(t)\in\R^m$, kinetic energy $T(v)$, and potential energy $U(q)$, the principle of least action poses the dynamics as a continuous-time optimization problem:
@@ -680,7 +1334,7 @@ footer a { color: var(--ink-2); }
   </div>
 
   <!-- §2 -->
-  <h3 class="reveal"><span class="num">2.</span>A unified Lagrangian for fluid&ndash;robot multiphysics</h3>
+  <h3 class="reveal" id="method-unified"><span class="num">2.</span>A unified Lagrangian for fluid&ndash;robot multiphysics</h3>
 
   <p class="reveal">
     For a rigid multibody robot interacting with an incompressible Newtonian fluid (e.g., water), we define
@@ -759,7 +1413,7 @@ footer a { color: var(--ink-2); }
   </div>
 
   <!-- §3 -->
-  <h3 class="reveal"><span class="num">3.</span>A variational integrator that handles the temporal lag</h3>
+  <h3 class="reveal" id="method-integrator"><span class="num">3.</span>A variational integrator that handles the temporal lag</h3>
 
   <p class="reveal">
     Discretizing the action in time is delicate. A midpoint quadrature gives a discrete Lagrangian
@@ -830,7 +1484,7 @@ footer a { color: var(--ink-2); }
   </details>
 
   <!-- §4 -->
-  <h3 class="reveal"><span class="num">4.</span>An integral-form immersed boundary for multibody robots</h3>
+  <h3 class="reveal" id="method-boundary"><span class="num">4.</span>An integral-form immersed boundary for multibody robots</h3>
 
   <p class="reveal">
     The classical immersed-boundary method enforces no-slip pointwise:
@@ -873,7 +1527,7 @@ footer a { color: var(--ink-2); }
 
 <!-- ============================================================ RESULTS ============================================================ -->
 <section class="wrap" id="results">
-  <h2 class="section-title reveal">Results</h2>
+  <h2 class="section-title reveal"><span class="section-kicker">03 &middot; Experiments</span>Results</h2>
 
   <h3 class="reveal">Steady undulatory swimming</h3>
   <p class="reveal">
@@ -970,7 +1624,7 @@ footer a { color: var(--ink-2); }
 
 <!-- ============================================================ HARDWARE ============================================================ -->
 <section class="wrap" id="hardware">
-  <h2 class="section-title reveal">Hardware</h2>
+  <h2 class="section-title reveal"><span class="section-kicker">04 &middot; Platform</span>Hardware</h2>
   <p class="reveal">
     The eel robot has <b>6 rigid links</b> (9.8&nbsp;cm each) connected by revolute joints driven by Dynamixel XC330-M288-T servos. It is fully untethered, with an onboard 900&nbsp;mAh battery and a Robotis OpenRB-150 microcontroller in the head link. Buoyant 3D-printed shells house the electronics; thin rigid fins underneath maintain a thin-plate hydrodynamic profile. Head-link pose is tracked by an overhead camera via AprilTags in a 122&nbsp;&times;&nbsp;122&nbsp;cm pool, recreating the simulated walled cavity.
   </p>
@@ -986,7 +1640,7 @@ footer a { color: var(--ink-2); }
 
 <!-- ============================================================ BIBTEX ============================================================ -->
 <section class="wrap" id="bibtex">
-  <h2 class="section-title reveal">Citation</h2>
+  <h2 class="section-title reveal"><span class="section-kicker">05 &middot; Resources</span>Citation</h2>
   <div class="bibtex-block reveal">
     <button class="copy-btn" onclick="copyBibtex(this)">Copy</button>
 <pre id="bibtex-content">@inproceedings{lee2026realizing,
@@ -1002,17 +1656,37 @@ footer a { color: var(--ink-2); }
 
 <!-- ============================================================ ACK ============================================================ -->
 <section class="wrap" id="ack">
-  <h2 class="section-title reveal">Acknowledgments</h2>
+  <h2 class="section-title reveal"><span class="section-kicker">06 &middot; Notes</span>Acknowledgments</h2>
   <p class="reveal">
     The authors thank the members of the Robotic Exploration Lab and the Soft Machines Lab at Carnegie Mellon University for valuable discussions and feedback.
-    <span style="color:var(--ink-3);">[Add funding sources and individual acknowledgments here.]</span>
   </p>
-  <p class="reveal" style="font-size:0.9rem; color:var(--ink-3);">
-    This page borrows its structure from the
-    <a href="https://nerfies.github.io/">Nerfies project page</a>; source available on
-    <a href="#">GitHub</a>.
+  <p class="reveal">
+    This work was supported by the National Science Foundation Graduate Research Fellowship under Grant No. DGE2140739.
   </p>
 </section>
+
+  </main>
+
+  <aside class="context-rail" aria-label="Paper at a glance">
+    <div class="rail-card">
+      <p class="rail-eyebrow">At a glance</p>
+      <h2>What this work unlocks</h2>
+      <p>A single differentiable model for fluid, robot, and their interface&mdash;validated on an untethered eel robot.</p>
+      <div class="rail-stat"><strong>75%</strong><span>lower tracking error at 40&deg; amplitude</span></div>
+      <div class="rail-stat"><strong>90&deg;</strong><span>open-loop C-start turn from rest</span></div>
+      <div class="rail-stat"><strong>1</strong><span>least-action problem for both physics</span></div>
+    </div>
+    <div class="rail-card">
+      <p class="rail-eyebrow">Research map</p>
+      <ol class="research-map">
+        <li><b>Unify the physics</b>Derive fluid and robot dynamics from one action.</li>
+        <li><b>Discretize consistently</b>Resolve the half-step temporal lag.</li>
+        <li><b>Differentiate the solve</b>Use implicit derivatives for control.</li>
+        <li><b>Transfer to hardware</b>Validate swimming and a dynamic C-start.</li>
+      </ol>
+    </div>
+  </aside>
+</div>
 
 <footer>
   <div class="wrap">
@@ -1034,6 +1708,43 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
 }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+const menuToggle = document.querySelector('.menu-toggle');
+const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+
+menuToggle.addEventListener('click', () => {
+  const open = document.body.classList.toggle('nav-open');
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Close paper navigation' : 'Open paper navigation');
+});
+
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.body.classList.remove('nav-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Open paper navigation');
+  });
+});
+
+const sectionLinks = [...document.querySelectorAll('.sidebar-nav > ul > li > a')];
+const trackedSections = sectionLinks
+  .map(link => {
+    const href = link.getAttribute('href');
+    return { link, section: href === '#top' ? document.getElementById('top') : document.querySelector(href) };
+  })
+  .filter(item => item.section);
+
+const navObserver = new IntersectionObserver((entries) => {
+  const visible = entries
+    .filter(entry => entry.isIntersecting)
+    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+  if (!visible) return;
+  sectionLinks.forEach(link => link.classList.remove('active'));
+  const match = trackedSections.find(item => item.section === visible.target);
+  if (match) match.link.classList.add('active');
+}, { rootMargin: '-18% 0px -68% 0px', threshold: 0 });
+
+trackedSections.forEach(item => navObserver.observe(item.section));
 </script>
 </body>
 </html>
