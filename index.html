@@ -163,11 +163,11 @@ p.lead { color: var(--ink-2); font-size: 1.04rem; }
 
 .hero-gif {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 50%;
   z-index: 0;
   pointer-events: none;
-  transform: translate(-50%, -50%) rotate(-90deg);
+  transform: translate(-50%, -50%) rotate(0deg);
   transform-origin: center center;
   opacity: 0.88;
   filter: saturate(1.1) contrast(1.05) brightness(1.55);
@@ -950,10 +950,10 @@ body {
   background: var(--ink);
 }
 .hero-gif {
-  top: 50%;
+  top: 48%;
   left: auto;
   right: -90px;
-  transform: translateY(-50%) rotate(-90deg);
+  transform: translateY(-50%) rotate(0deg);
   opacity: .48;
 }
 .hero-gif img { width: 440px; }
@@ -1865,15 +1865,7 @@ footer .wrap { max-width: 1180px; }
 
   </main>
 
-  <aside class="context-rail" aria-label="Paper at a glance">
-    <div class="rail-card">
-      <p class="rail-eyebrow">At a glance</p>
-      <h2>What this work unlocks</h2>
-      <p>A single differentiable model for fluid, robot, and their interface&mdash;validated on an untethered eel robot.</p>
-      <div class="rail-stat"><strong>75%</strong><span>lower tracking error at 40&deg; amplitude</span></div>
-      <div class="rail-stat"><strong>90&deg;</strong><span>open-loop C-start turn from rest</span></div>
-      <div class="rail-stat"><strong>1</strong><span>least-action problem for both physics</span></div>
-    </div>
+  <aside class="context-rail" aria-label="Research map">
     <div class="rail-card">
       <p class="rail-eyebrow">Research map</p>
       <ol class="research-map">
