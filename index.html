@@ -187,13 +187,14 @@ p.lead { color: var(--ink-2); font-size: 1.04rem; }
 }
 
 .authors { font-size: 1.28rem; line-height: 1.7; margin: 0 auto 10px; max-width: 880px; color: var(--ink); }
+.authors .author-entry { display: inline-block; white-space: nowrap; }
 .authors a { color: var(--ink); border-bottom: 1px solid transparent; transition: border-color .15s; }
 .authors a:hover { color: var(--accent); border-bottom-color: var(--accent); text-decoration: none; }
 .authors .sup { font-size: 0.7em; vertical-align: super; color: var(--accent-2); margin-left: 1px; font-weight: 600; }
 .authors .sep { color: var(--ink-3); padding: 0 4px; }
 
 .affil { font-family: "Newsreader", Georgia, serif; font-style: normal; font-size: 1.24rem; color: var(--ink-2); margin: 12px 0 6px; }
-.equal-note { font-size: 1.02rem; color: var(--ink-3); margin: 6px 0 44px; }
+.equal-note { font-family: "Newsreader", Georgia, serif; font-style: normal; font-size: 1.24rem; color: var(--ink-2); margin: 6px 0 44px; }
 
 .buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 12px; }
 .btn {
@@ -565,6 +566,76 @@ details.deriv .body { padding: 4px 22px 18px; border-top: 1px solid var(--rule);
 }
 .timeline-strip .header span:first-child { visibility: hidden; }
 
+.bom-table-wrap {
+  width: 100%;
+  max-width: 780px;
+  margin: 30px auto 0;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  -webkit-overflow-scrolling: touch;
+}
+.bom-table {
+  width: 100%;
+  min-width: 740px;
+  border-collapse: collapse;
+  color: var(--ink);
+  font-family: "Geist", sans-serif;
+  font-size: .82rem;
+  line-height: 1.45;
+}
+.bom-table caption {
+  padding: 15px 16px 12px;
+  color: var(--ink);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 1.14rem;
+  font-weight: 600;
+  text-align: left;
+}
+.bom-table th,
+.bom-table td {
+  padding: 9px 11px;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+}
+.bom-table thead th {
+  color: var(--ink-2);
+  background: var(--bg-soft);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-align: left;
+  text-transform: uppercase;
+}
+.bom-table tbody tr:hover { background: rgba(107,182,224,.045); }
+.bom-table th:first-child,
+.bom-table td:first-child,
+.bom-table th:nth-child(4),
+.bom-table td:nth-child(4) { text-align: center; }
+.bom-table th:last-child,
+.bom-table td:last-child {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.bom-price-pair {
+  font-family: "Geist", sans-serif;
+  font-size: .82rem;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.bom-table tfoot th,
+.bom-table tfoot td {
+  color: var(--ink);
+  background: rgba(107,182,224,.08);
+  border-top: 2px solid var(--accent);
+  font-weight: 700;
+}
+.bom-table tfoot th { text-align: left; }
+
 .bibtex-block {
   position: relative;
   background: var(--bg-soft);
@@ -929,7 +1000,7 @@ body {
 .hero .authors,
 .hero .authors a { color: var(--ink); }
 .hero .affil { color: var(--ink-2); }
-.hero .equal-note { color: var(--ink-3); }
+.hero .equal-note { color: var(--ink-2); }
 .hero .buttons { justify-content: flex-start; }
 .hero .btn {
   border-color: var(--ink);
@@ -1198,7 +1269,8 @@ footer .wrap { max-width: 1180px; }
   }
   .hero-gif img { width: 340px; }
   .authors { font-size: 1.08rem; }
-  .affil { font-size: 1.04rem; }
+  .affil,
+  .equal-note { font-size: 1.04rem; }
   .awards { gap: 6px; }
   .award { padding: 5px 9px; }
   .abstract p:first-of-type { font-size: 1.15rem; }
@@ -1290,11 +1362,11 @@ footer .wrap { max-width: 1180px; }
   </div>
 
   <p class="authors reveal">
-    <a href="https://openreview.net/profile?id=~Jeong_Hun_Lee1">Jeong Hun Lee</a><span class="sup">1,&dagger;</span><span class="sep">&middot;</span>
-    <a href="https://openreview.net/profile?id=~Junzhe_Hu2">Junzhe Hu</a><span class="sup">1,&dagger;</span><span class="sep">&middot;</span>
-    <a href="https://openreview.net/profile?id=~Sofia_Kwok1">Sofia Kwok</a><span class="sup">1</span><span class="sep">&middot;</span>
-    <a href="https://openreview.net/profile?id=~Carmel_Majidi1">Carmel Majidi</a><span class="sup">1</span><span class="sep">&middot;</span>
-    <a href="https://openreview.net/profile?id=~Zac_Manchester1">Zachary Manchester</a><span class="sup">1,2</span>
+    <span class="author-entry"><a href="https://openreview.net/profile?id=~Jeong_Hun_Lee1">Jeong Hun Lee</a><span class="sup">1,&dagger;</span><span class="sep">&middot;</span></span>
+    <span class="author-entry"><a href="https://openreview.net/profile?id=~Junzhe_Hu2">Junzhe Hu</a><span class="sup">1,&dagger;</span><span class="sep">&middot;</span></span>
+    <span class="author-entry"><a href="https://openreview.net/profile?id=~Sofia_Kwok1">Sofia Kwok</a><span class="sup">1</span><span class="sep">&middot;</span></span>
+    <span class="author-entry"><a href="https://openreview.net/profile?id=~Carmel_Majidi1">Carmel Majidi</a><span class="sup">1</span><span class="sep">&middot;</span></span>
+    <span class="author-entry"><a href="https://openreview.net/profile?id=~Zac_Manchester1">Zachary Manchester</a><span class="sup">1,2</span></span>
   </p>
   <p class="affil reveal">
     <sup>1</sup> Carnegie Mellon University
@@ -1810,6 +1882,42 @@ footer .wrap { max-width: 1180px; }
       Sim-to-real validation setup. An overhead camera tracks AprilTags on the head link inside a 122&nbsp;&times;&nbsp;122&nbsp;cm pool that recreates the simulated walled cavity. <em>Inset:</em> the bioinspired eel robot, with buoyant 3D-printed body shells housing the Dynamixel <span class="tag-ours">motors</span> and head-link <span class="tag-hardware">microcontroller</span>; thin rigid <span class="tag-coupling">fins</span> underneath maintain a thin-plate hydrodynamic profile.
     </figcaption>
   </figure>
+
+  <div class="bom-table-wrap reveal">
+    <table class="bom-table">
+      <caption>Bill of materials for SwimGym eel robot (2-link)</caption>
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Part Description</th>
+          <th scope="col">Material</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price (USD)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>3D-printing filament</td><td>PET-CF (3D printed)</td><td>1</td><td>$44.99</td></tr>
+        <tr><td>2</td><td>1-mm-thick plate</td><td>Fiberglass</td><td>1</td><td>$9.99</td></tr>
+        <tr><td>3</td><td>7.4V 900mAh LiPo battery</td><td>Lithium Polymer</td><td>1</td><td>$9.90</td></tr>
+        <tr><td>4</td><td>PCB board</td><td>FR-4 PCB</td><td>1</td><td>$3.00</td></tr>
+        <tr><td>5</td><td>25.4-cm-long JST wires</td><td>Wires</td><td>3</td><td>$1.41</td></tr>
+        <tr><td>5</td><td>EHR-3 connector</td><td>Plastic</td><td>2</td><td>$0.20</td></tr>
+        <tr><td>5</td><td>DC-to-DC Converters (OKR-T/6-W12-C)</td><td>Electronics</td><td>1</td><td>$9.24</td></tr>
+        <tr><td>6</td><td>OpenRB-150 MicroController</td><td>Electronics</td><td>1</td><td>$28.64</td></tr>
+        <tr><td>7</td><td>XC330/XL330-M288-T Servos</td><td>NA</td><td>1</td><td><span class="bom-price-pair">$103.39 / $27.49</span></td></tr>
+        <tr><td>8</td><td>Fasteners (screws, helicoils, pins, etc.)</td><td>Stainless Steel</td><td>Multiple</td><td>$15.40</td></tr>
+      </tbody>
+      <tfoot>
+        <tr><th scope="row" colspan="4">Total</th><td><span class="bom-price-pair">$226.16 (Head) / $150.26 (Body)</span></td></tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <h3 class="reveal">Design</h3>
+  <p class="reveal">
+    All design files can be found
+    <a href="https://drive.google.com/drive/folders/1IPdChMjlqlovJBqDkWEingscnlNQRf0u?usp=sharing" target="_blank" rel="noopener noreferrer"><em>here</em></a>.
+  </p>
 </section>
 
 <!-- ============================================================ LIMITATIONS ============================================================ -->
